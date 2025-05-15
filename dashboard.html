@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JunaidSMM Dashboard</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">JunaidSMM</a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Welcome, <span id="username">User</span></h2>
+      <p>Balance: $<span id="balance">0.00</span></p>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Place Order</h4>
+      <form id="orderForm">
+        <div class="form-group">
+          <label for="service">Service</label>
+          <select class="form-control" id="service" name="service">
+            <option value="1">Instagram Followers</option>
+            <option value="2">TikTok Likes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="link">Link</label>
+          <input type="text" class="form-control" id="link" name="link" required/>
+        </div>
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" class="form-control" id="quantity" name="quantity" required/>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Order</button>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <h4>Recharge Balance</h4>
+      <form id="rechargeForm">
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="number" class="form-control" name="amount" required/>
+        </div>
+        <div class="form-group">
+          <label for="method">Payment Method</label>
+          <select class="form-control" name="method">
+            <option value="stripe">Stripe</option>
+            <option value="jazzcash">JazzCash</option>
+            <option value="easypaisa">Easypaisa</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="reference">Transaction ID / Stripe Token</label>
+          <input type="text" class="form-control" name="reference"/>
+        </div>
+        <button type="submit" class="btn btn-success">Recharge</button>
+      </form>
+      <div id="recharge-status" class="mt-2"></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <h4>Order History</h4>
+  <table class="table table-bordered" id="ordersTable">
+    <thead>
+      <tr><th>Link</th><th>Quantity</th><th>Status</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script>
+  // Example: Fetch user profile and orders (mockup)
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("username").innerText = "Junaid";
+    document.getElementById("balance").innerText = "150.00";
+
+    const orders = [
+      {link: "https://tiktok.com/@junaid", quantity: 500, status: "Completed"},
+      {link: "https://instagram.com/p/xyz", quantity: 1000, status: "Pending"}
+    ];
+    const tbody = document.querySelector("#ordersTable tbody");
+    orders.forEach(order => {
+      const row = `<tr><td>${order.link}</td><td>${order.quantity}</td><td>${order.status}</td></tr>`;
+      tbody.innerHTML += row;
+    });
+  });
+
+  document.getElementById("orderForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    alert("Order submitted (mockup). Connect backend to handle it.");
+  });
+
+  document.getElementById("rechargeForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    document.getElementById("recharge-status").innerText = "Recharge request submitted (mockup).";
+  });
+</script>
+
+</body>
+</html>
